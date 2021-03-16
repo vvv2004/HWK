@@ -11,11 +11,16 @@ public class Dictionaries {
         fillMonths(months);
 
         System.out.print("Input command: ");
-        String command = read.nextLine();
+        String command = "";
 
         while(!command.equals("stop")){
+
+            command = read.nextLine();
+
             if(command.equals("num")){
-                //search by number
+                int n = read.nextInt();
+
+                searchByNum(n, months);
             }else if(command.equals("name")){
                 //search by name
             }
@@ -37,4 +42,17 @@ public class Dictionaries {
         months.put(12, "December");
     }
 
+    public static String searchByName(String name, HashMap<Integer, String> months){
+
+
+        return "";
+    }
+
+    public static int searchByNum(int num, HashMap<Integer, String> months){
+        String current = months.get(num);
+
+        System.out.printf("The %d month is %s" , num, current);
+
+        return 0;
+    }
 }
