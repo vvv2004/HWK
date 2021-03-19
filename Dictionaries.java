@@ -12,9 +12,8 @@ public class Dictionaries {
 
 
 
-        HashMap<Integer, String> months_digitKeys = new HashMap<>();
-        HashMap<String, Integer> months_stringKeys = new HashMap<>();
-        fillMonths(months_digitKeys, months_stringKeys);
+        HashMap<Integer, String> months = new HashMap<>();
+        fillMonths(months);
 
         System.out.println("---------------------------------");
         String command = "";
@@ -40,7 +39,9 @@ public class Dictionaries {
 
                     //Ако номера на месеца е съществуващ
                     if(n > 1 && n < 12) {
-                        searchByNum(n, months_digitKeys); // Метод, който намира и принтира месеца
+
+                        searchByNum(n, months); // Метод, който намира и принтира месеца
+
                     }else{ // Ако номера на месеца не съществува
                         System.out.println("There is no month answering your input!");
                         System.out.println("--------------------------------------------");
@@ -53,7 +54,7 @@ public class Dictionaries {
                 case "name":
                     System.out.print("Input the month /USE FIRST CAPITAL LETTER!/ : ");
                     String name = read.next();
-                    searchByName(name, months_stringKeys); //Метод, който намира и принтира месеца
+                    searchByName(name, months); //Метод, който намира и принтира месеца
 
                     break;
 
@@ -71,41 +72,28 @@ public class Dictionaries {
 
 
     //ЗАПЪЛВАНЕ НА МЕСЕЦИ В РЕЧНИЦИТЕ
-    private static void fillMonths(HashMap<Integer, String> months_n, HashMap<String, Integer> months_d) {
-        months_n.put(1, "January");
-        months_n.put(2, "February");
-        months_n.put(3, "March");
-        months_n.put(4, "April");
-        months_n.put(5, "May");
-        months_n.put(6, "June");
-        months_n.put(7, "July");
-        months_n.put(8, "August");
-        months_n.put(9, "September");
-        months_n.put(10, "October");
-        months_n.put(11, "November");
-        months_n.put(12, "December");
+    private static void fillMonths(HashMap<Integer, String> months) {
 
-        //==================================================================================
+        months.put(1, "January");
+        months.put(2, "February");
+        months.put(3, "March");
+        months.put(4, "April");
+        months.put(5, "May");
+        months.put(6, "June");
+        months.put(7, "July");
+        months.put(8, "August");
+        months.put(9, "September");
+        months.put(10, "October");
+        months.put(11, "November");
+        months.put(12, "December");
 
-        months_d.put("January", 1);
-        months_d.put("February", 2);
-        months_d.put("March", 3);
-        months_d.put("April", 4);
-        months_d.put("May", 5);
-        months_d.put("June", 6);
-        months_d.put("July", 7);
-        months_d.put("August", 8);
-        months_d.put("September", 9);
-        months_d.put("October", 10);
-        months_d.put("November", 11);
-        months_d.put("December", 12);
     }
 
 
     //ТЪРСЕНЕ ПО ИМЕ
-    public static void searchByName(String name, HashMap<String, Integer> months) {
+    public static void searchByName(String name, HashMap<Integer, String> months) {
         try {
-            int current = months.get(name);
+            int current = getKeyFromValue(name, months);
 
             System.out.println("---------------------------------");
             System.out.printf("%s is the %d month", name, current);
@@ -131,5 +119,18 @@ public class Dictionaries {
         System.out.println("--------------------------------------------");
 
 
+    }
+
+    public static int getKeyFromValue(String input, HashMap<Integer, String> months){
+        int value = 0;
+
+        for (int i = 1; i <= months.size(); i++) {
+            if(months.get(i).equals(input)){
+                value = i;
+            }
+        }
+
+
+        return value;
     }
 }
